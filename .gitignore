@@ -1,0 +1,11 @@
+*.log
+*.ser
+*.bak
+/.gradle/
+/bin/
+/build/
+/target/
+/work/
+.DS_Store
+.classpath
+.project
