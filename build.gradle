@@ -4,7 +4,10 @@ apply plugin: "java"
 group = "com.tdder.learning.xxxx"
 version = "0.0.1-SNAPSHOT"
 
-repositories{ mavenCentral() }
+repositories {
+	mavenCentral()
+	mavenRepo url: "http://hotchpotch.sourceforge.jp/maven2/release"
+}
 
 dependencies{
 	compile 'org.slf4j:slf4j-api:1.7.5'
