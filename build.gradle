@@ -53,6 +53,15 @@ task prepareDirectories(description: 'create source directories') << {
 			}
 		}
 	}
+
+	if (project.plugins.hasPlugin("war")) {
+		if (!webAppDir.exists()) {
+			assert webAppDir.mkdirs()
+			logger.info("mkdir: {}", webAppDir)
+		} else {
+			logger.info("already exist: {}", webAppDir)
+		}
+	}
 }
 
 def sourceEncoding = "UTF-8"
