@@ -45,22 +45,21 @@ tasks.eclipseJdt << {
 task prepareDirectories(description: 'create source directories') << {
 	project.sourceSets.each { sourceSet ->
 		sourceSet.allSource.srcDirs.each { dir ->
-			if (!dir.exists()) {
-				assert dir.mkdirs()
-				logger.info("mkdir: {}", dir)
-			} else {
-				logger.info("already exist: {}", dir)
-			}
+			_mkdir(dir);
 		}
 	}
 
 	if (project.plugins.hasPlugin("war")) {
-		if (!webAppDir.exists()) {
-			assert webAppDir.mkdirs()
-			logger.info("mkdir: {}", webAppDir)
-		} else {
-			logger.info("already exist: {}", webAppDir)
-		}
+		_mkdir(webAppDir);
+	}
+}
+
+def _mkdir(dir) {
+	if (!dir.exists()) {
+		assert dir.mkdirs()
+		logger.info("mkdir: {}", dir)
+	} else {
+		logger.info("already exist: {}", dir)
 	}
 }
 
