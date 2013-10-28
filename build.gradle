@@ -45,14 +45,14 @@ tasks.eclipseJdt << {
 task prepareDirectories(description: 'create source directories') << {
 	project.sourceSets.each { sourceSet ->
 		sourceSet.allSource.srcDirs.each { dir ->
-			_mkdir(dir);
+			_mkdir(dir)
 			def packageDir = new File(dir, project.group.replace(".", "/"))
-			_mkdir(packageDir);
+			_mkdir(packageDir)
 		}
 	}
 
 	if (project.plugins.hasPlugin("war")) {
-		_mkdir(webAppDir);
+		_mkdir(webAppDir)
 	}
 }
 
