@@ -9,3 +9,9 @@
 .DS_Store
 .classpath
 .project
+
+### IDEA ###
+/.idea/
+/*.iml
+#.idea/workspace.xml
+
