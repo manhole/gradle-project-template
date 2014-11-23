@@ -3,23 +3,23 @@ task wrapper(type: Wrapper) {
 }
 
 eclipse {
-    pathVariables "GRADLE_USER_HOME": gradle.gradleUserHomeDir
+    pathVariables 'GRADLE_USER_HOME': gradle.gradleUserHomeDir
 }
 
 tasks.eclipseJdt {
-    assert "org.eclipse.jdt.core.prefs" == outputFile.name
+    assert 'org.eclipse.jdt.core.prefs' == outputFile.name
     ext.originalOutputFile = outputFile
-    outputFile = (outputFile.absolutePath + ".tmp") as File
+    outputFile = (outputFile.absolutePath + '.tmp') as File
 }
 tasks.eclipseJdt << {
-    assert "org.eclipse.jdt.core.prefs.tmp" == outputFile.name
-    assert "org.eclipse.jdt.core.prefs" == ext.originalOutputFile.name
-    List lines = outputFile.readLines("UTF-8")
+    assert 'org.eclipse.jdt.core.prefs.tmp' == outputFile.name
+    assert 'org.eclipse.jdt.core.prefs' == ext.originalOutputFile.name
+    List lines = outputFile.readLines('UTF-8')
     Collections.sort(lines)
-    ext.originalOutputFile.withWriter("UTF-8") { writer ->
+    ext.originalOutputFile.withWriter('UTF-8') { writer ->
         lines.each { line ->
             writer << line
-            writer << "\r\n"
+            writer << '\r\n'
         }
     }
     assert outputFile.delete()
@@ -29,12 +29,12 @@ task prepareDirectories(description: 'create source directories') << {
     project.sourceSets.each { sourceSet ->
         sourceSet.allSource.srcDirs.each { dir ->
             _mkdir(dir)
-            def packageDir = new File(dir, project.group.replace(".", "/"))
+            def packageDir = new File(dir, project.group.replace('.', '/'))
             _mkdir(packageDir)
         }
     }
 
-    if (project.plugins.hasPlugin("war")) {
+    if (project.plugins.hasPlugin('war')) {
         _mkdir(webAppDir)
     }
 }
@@ -42,15 +42,15 @@ task prepareDirectories(description: 'create source directories') << {
 def _mkdir(dir) {
     if (!dir.exists()) {
         assert dir.mkdirs()
-        logger.info("mkdir: {}", dir)
+        logger.info('mkdir: {}', dir)
     } else {
-        logger.info("already exist: {}", dir)
+        logger.info('already exist: {}', dir)
     }
 }
 
-def sourceEncoding = "UTF-8"
+def sourceEncoding = 'UTF-8'
 tasks.withType(SourceTask).each {
-    // ":compileGroovy", ":compileJava", "compileTestGroovy", ":compileTestJava", ":groovydoc", ":javadoc"
+    // ':compileGroovy', ':compileJava', 'compileTestGroovy', ':compileTestJava', ':groovydoc', ':javadoc'
     def p1 = 'options'
     def p2 = 'encoding'
     if (it.hasProperty(p1)) {
