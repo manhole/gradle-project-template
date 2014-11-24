@@ -55,12 +55,12 @@ tasks.withType(SourceTask).each {
     def p2 = 'encoding'
     if (it.hasProperty(p1)) {
         if (it[p1].hasProperty(p2)) {
-            logger.info "${it} has options.encoding property"
+            logger.info('{} has \'{}.{}\' property', it, p1, p2)
             it[p1][p2] = sourceEncoding
         } else {
-            logger.info "${it} has no ${p2} property"
+            logger.info('{} has no \'{}.{}\' property', it, p1, p2)
         }
     } else {
-        logger.info "${it} has no ${p1} property"
+        logger.info('{} has no \'{}\' property', it, p1)
     }
 }
