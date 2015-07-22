@@ -1,5 +1,7 @@
 task wrapper(type: Wrapper) {
     gradleVersion = 2.5
+    // @see org.gradle.api.tasks.wrapper.Wrapper, org.gradle.util.DistributionLocator
+    distributionUrl = 'https://services.gradle.org/distributions/gradle-2.5-all.zip'
 }
 
 task prepareDirectories(description: 'create source directories') << {
