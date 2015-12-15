@@ -20,5 +20,5 @@ dependencies {
     testCompile 'junit:junit:4.12'
     testCompile 'org.hamcrest:hamcrest-library:1.3'
 
-    testCompile 'jp.sourceforge.hotchpotch:coopie:0.3.1'
+    testCompile 'jp.sourceforge.hotchpotch:coopie:0.4.0'
 }
