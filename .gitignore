@@ -11,7 +11,8 @@
 .project
 
 ### IDEA ###
-/.idea/
-/*.iml
+.idea/*
+*.iml
+!.idea/codeStyleSettings.xml
 #.idea/workspace.xml
 
