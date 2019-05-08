@@ -1,20 +1,30 @@
-task wrapper(type: Wrapper) {
-    gradleVersion = '4.10.2'
-    // @see org.gradle.api.tasks.wrapper.Wrapper, org.gradle.util.DistributionLocator
-    distributionUrl = 'https://services.gradle.org/distributions/gradle-4.10.2-all.zip'
+import groovy.json.JsonSlurper
+
+// https://qiita.com/cypher256/items/f3db6bba86692c3c7733
+// @see org.gradle.api.tasks.wrapper.Wrapper, org.gradle.util.DistributionLocator
+wrapper {
+    distributionType = Wrapper.DistributionType.ALL
+    doFirst {
+        def versionService = new URL('https://services.gradle.org/versions/current')
+        gradleVersion = new JsonSlurper().parseText(versionService.text).version
+        println "gradleVersion: ${gradleVersion}"
+    }
 }
 
-task prepareDirectories(description: 'create source directories') << {
-    project.sourceSets.each { sourceSet ->
-        sourceSet.allSource.srcDirs.each { dir ->
-            _mkdir(dir)
-            def packageDir = new File(dir, project.group.replace('.', '/'))
-            _mkdir(packageDir)
-        }
-    }
 
-    if (project.plugins.hasPlugin('war')) {
-        _mkdir(webAppDir)
+task prepareDirectories(description: 'create source directories') {
+    doLast {
+        project.sourceSets.each { sourceSet ->
+            sourceSet.allSource.srcDirs.each { dir ->
+                _mkdir(dir)
+                def packageDir = new File(dir, project.group.replace('.', '/'))
+                _mkdir(packageDir)
+            }
+        }
+
+        if (project.plugins.hasPlugin('war')) {
+            _mkdir(webAppDir)
+        }
     }
 }
 
