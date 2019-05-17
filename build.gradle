@@ -4,8 +4,8 @@ apply from: 'gradle/eclipse.gradle'
 
 group = 'com.tdder.learning.xxxx'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '1.6'
-targetCompatibility = '1.6'
+sourceCompatibility = '8'
+targetCompatibility = '8'
 
 repositories {
     mavenCentral()
