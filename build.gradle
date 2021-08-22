@@ -20,8 +20,19 @@ dependencies {
 
     testImplementation 'ch.qos.logback:logback-classic:1.1.2'
     testImplementation 'ch.qos.logback:logback-core:1.1.2'
-    testImplementation 'junit:junit:4.12'
-    testImplementation 'org.hamcrest:hamcrest-library:1.3'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.7.2'
+    testImplementation 'org.junit.vintage:junit-vintage-engine:5.7.2'
+    testImplementation 'org.hamcrest:hamcrest:2.2'
 
     testImplementation 'jp.sourceforge.hotchpotch:coopie:0.4.0'
+}
+
+test {
+    // UP-TO-DATEにしない方法
+    //dependsOn 'cleanTest'
+    useJUnitPlatform()
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+    exclude '**/*$*'
 }
