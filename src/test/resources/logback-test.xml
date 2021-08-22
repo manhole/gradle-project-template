@@ -30,15 +30,7 @@
   </appender>
   -->
 
-  <logger name="jp.sourceforge.hotchpotch.coopie" additivity="false">
-    <level value="debug" />
-    <appender-ref ref="STDOUT" />
-    <!--
-    <appender-ref ref="FILE" />
-    -->
-  </logger>
-
-  <logger name="org.seasar" additivity="false">
+  <logger name="com.tdder.learning" additivity="false">
     <level value="debug" />
     <appender-ref ref="STDOUT" />
     <!--
