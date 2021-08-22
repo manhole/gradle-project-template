@@ -24,7 +24,7 @@ dependencies {
     testImplementation 'org.junit.vintage:junit-vintage-engine:5.7.2'
     testImplementation 'org.hamcrest:hamcrest:2.2'
 
-    testImplementation 'jp.sourceforge.hotchpotch:coopie:0.4.0'
+    testImplementation 'jp.sourceforge.hotchpotch:coopie:0.4.1'
 }
 
 test {
