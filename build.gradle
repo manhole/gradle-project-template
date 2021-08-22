@@ -21,7 +21,12 @@ dependencies {
     testImplementation 'ch.qos.logback:logback-classic:1.2.5'
     testImplementation 'ch.qos.logback:logback-core:1.2.5'
     testImplementation 'org.junit.jupiter:junit-jupiter:5.7.2'
-    testImplementation 'org.junit.vintage:junit-vintage-engine:5.7.2'
+    testImplementation 'org.junit.vintage:junit-vintage-engine:5.7.2', {
+        exclude group: 'junit', module: 'junit'
+    }
+    testImplementation 'junit:junit:4.13', {
+        exclude group: 'org.hamcrest', module: 'hamcrest-core'
+    }
     testImplementation 'org.hamcrest:hamcrest:2.2'
 
     testImplementation 'jp.sourceforge.hotchpotch:coopie:0.4.1'
