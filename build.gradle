@@ -10,7 +10,9 @@ targetCompatibility = JavaVersion.VERSION_1_8
 
 repositories {
     mavenCentral()
-    maven { url 'http://hotchpotch.sourceforge.jp/maven2/release' }
+    maven {
+        url 'https://hotchpotch.osdn.jp/maven2/release'
+    }
 }
 
 dependencies {
