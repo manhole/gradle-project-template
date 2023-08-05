@@ -19,10 +19,10 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.slf4j:slf4j-api:1.7.35'
+    implementation 'org.slf4j:slf4j-api:2.0.7'
 
-    testImplementation 'ch.qos.logback:logback-classic:1.2.10'
-    testImplementation 'ch.qos.logback:logback-core:1.2.10'
+    testImplementation 'ch.qos.logback:logback-classic:1.4.8'
+    testImplementation 'ch.qos.logback:logback-core:1.4.8'
     testImplementation 'org.junit.jupiter:junit-jupiter:5.8.2'
     testImplementation 'org.junit.vintage:junit-vintage-engine:5.8.2', {
         exclude group: 'junit', module: 'junit'

@@ -30,16 +30,14 @@
   </appender>
   -->
 
-  <logger name="com.tdder.learning" additivity="false">
-    <level value="debug" />
+  <logger name="com.tdder.learning" additivity="false" level="debug">
     <appender-ref ref="STDOUT" />
     <!--
     <appender-ref ref="FILE" />
     -->
   </logger>
 
-  <root>
-    <level value="info" />
+  <root level="info">
     <appender-ref ref="STDOUT" />
     <!--
     <appender-ref ref="FILE" />
