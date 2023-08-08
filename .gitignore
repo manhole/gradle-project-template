@@ -13,6 +13,7 @@
 ### IDEA ###
 .idea/*
 *.iml
+!.idea/codeStyles/
 !.idea/codeStyleSettings.xml
 #.idea/workspace.xml
 
