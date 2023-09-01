@@ -24,7 +24,7 @@
       </option>
     </GroovyCodeStyleSettings>
     <JavaCodeStyleSettings>
-      <option name="FIELD_NAME_PREFIX" value="_" />
+      <option name="FIELD_NAME_SUFFIX" value="_" />
       <option name="GENERATE_FINAL_LOCALS" value="true" />
       <option name="GENERATE_FINAL_PARAMETERS" value="true" />
       <option name="CLASS_COUNT_TO_USE_IMPORT_ON_DEMAND" value="1000" />
