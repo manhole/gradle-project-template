@@ -14,7 +14,7 @@ targetCompatibility = JavaVersion.VERSION_1_8
 repositories {
     mavenCentral()
     maven {
-        url 'https://hotchpotch.osdn.jp/maven2/release'
+        url 'https://manhole.github.io/maven2/release'
     }
 }
 
@@ -33,7 +33,7 @@ dependencies {
     }
     testImplementation 'org.hamcrest:hamcrest:2.2'
 
-    testImplementation 'jp.sourceforge.hotchpotch:coopie:0.4.1'
+    testImplementation 'jp.sourceforge.hotchpotch:coopie:0.5.0'
 }
 
 test {
