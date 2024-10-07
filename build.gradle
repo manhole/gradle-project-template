@@ -8,9 +8,6 @@ apply from: 'gradle/eclipse.gradle'
 group = 'com.tdder.learning.xxxx'
 version = '0.0.1-SNAPSHOT'
 
-sourceCompatibility = JavaVersion.VERSION_1_8
-targetCompatibility = JavaVersion.VERSION_1_8
-
 repositories {
     mavenCentral()
     maven {
@@ -22,6 +19,8 @@ java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(8)
     }
+    sourceCompatibility = JavaLanguageVersion.of(8)
+    targetCompatibility = JavaLanguageVersion.of(8)
 }
 
 dependencies {
