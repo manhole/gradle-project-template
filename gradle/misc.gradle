@@ -1,12 +1,18 @@
-import groovy.json.JsonSlurper
-
 // https://qiita.com/cypher256/items/f3db6bba86692c3c7733
 // @see org.gradle.api.tasks.wrapper.Wrapper, org.gradle.util.DistributionLocator
 tasks.withType(Wrapper).configureEach {
     distributionType = Wrapper.DistributionType.ALL
+    // 最新版を使いたい場合はこちら
+//    doFirst {
+//        def versionService = new URL('https://services.gradle.org/versions/current')
+//        gradleVersion = new groovy.json.JsonSlurper().parseText(versionService.text).version
+//        println "gradleVersion: ${gradleVersion}"
+//    }
+    // 8.x 系を使いたい場合はこちら。Java 8 は 8.x まで。
     doFirst {
-        def versionService = new URL('https://services.gradle.org/versions/current')
-        gradleVersion = new JsonSlurper().parseText(versionService.text).version
+        def versionService = new URL('https://services.gradle.org/versions/8')
+        // 配列の先頭が最新版のようなので、[0] を指定する
+        gradleVersion = new groovy.json.JsonSlurper().parseText(versionService.text)[0].version
         println "gradleVersion: ${gradleVersion}"
     }
 }
