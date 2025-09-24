@@ -11,7 +11,7 @@ version = '0.0.1-SNAPSHOT'
 repositories {
     mavenCentral()
     maven {
-        url 'https://manhole.github.io/maven2/release'
+        url = 'https://manhole.github.io/maven2/release'
     }
 }
 
