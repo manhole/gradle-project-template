@@ -3,7 +3,6 @@ plugins {
 }
 
 apply from: 'gradle/misc.gradle'
-apply from: 'gradle/eclipse.gradle'
 
 group = 'com.tdder.learning.xxxx'
 version = '0.0.1-SNAPSHOT'
@@ -49,7 +48,7 @@ tasks.withType(Test).configureEach {
     //dependsOn 'cleanTest'
     useJUnitPlatform()
     testLogging {
-        events "passed", "skipped", "failed"
+        events('passed', 'skipped', 'failed')
     }
-    exclude '**/*$*'
+    exclude('**/*$*')
 }

@@ -1,40 +1,35 @@
+import groovy.json.JsonSlurper
+
 // https://qiita.com/cypher256/items/f3db6bba86692c3c7733
-// @see org.gradle.api.tasks.wrapper.Wrapper, org.gradle.util.DistributionLocator
+// Gradle 9 以降は実行に JDK 17 が必要なので、Gradle 自体を JDK 8 で動かす場合は 8 系の最新版に追従する。
+// ./gradlew wrapper を 2 回実行する (2 回目で gradle-wrapper.jar と gradlew スクリプトも更新される)。
+// なお doFirst で上書きするため、--gradle-version の指定は効かない。
 tasks.withType(Wrapper).configureEach {
     distributionType = Wrapper.DistributionType.ALL
-    // 最新版を使いたい場合はこちら
-//    doFirst {
-//        def versionService = new URL('https://services.gradle.org/versions/current')
-//        gradleVersion = new groovy.json.JsonSlurper().parseText(versionService.text).version
-//        println "gradleVersion: ${gradleVersion}"
-//    }
-    // 8.x 系を使いたい場合はこちら。Java 8 は 8.x まで。
     doFirst {
-        def versionService = new URL('https://services.gradle.org/versions/8')
-        // 配列の先頭が最新版のようなので、[0] を指定する
-        gradleVersion = new groovy.json.JsonSlurper().parseText(versionService.text)[0].version
+        // https://services.gradle.org/versions/8 は 8 系の全バージョンを新しい順に返す。
+        // RC / milestone も混ざっている (開発中の系列では nightly も) ので、正式リリースを示す final == true の先頭を取る。
+        def versions = new JsonSlurper().parseText(new URI('https://services.gradle.org/versions/8').toURL().text)
+        def latest = versions.find { it.final }
+        gradleVersion = latest.version
         println "gradleVersion: ${gradleVersion}"
     }
 }
 
-
-task prepareDirectories(description: 'create source directories') {
+tasks.register('prepareDirectories') {
+    description = 'create source directories'
+    // 実行時 (doLast 内) に project を参照すると Gradle 9 で非推奨 (Gradle 10 でエラー) なので、設定時に値を取り出しておく
+    def dirs = sourceSets.collectMany { it.allSource.srcDirs }
+    def packagePath = project.group.toString().replace('.', '/')
     doLast {
-        project.sourceSets.each { sourceSet ->
-            sourceSet.allSource.srcDirs.each { dir ->
-                _mkdir(dir)
-                def packageDir = new File(dir, project.group.replace('.', '/'))
-                _mkdir(packageDir)
-            }
-        }
-
-        if (project.plugins.hasPlugin('war')) {
-            _mkdir(webAppDir)
+        dirs.each { dir ->
+            _mkdir(dir)
+            _mkdir(new File(dir, packagePath))
         }
     }
 }
 
-def _mkdir(dir) {
+def _mkdir(File dir) {
     if (!dir.exists()) {
         assert dir.mkdirs()
         logger.info('mkdir: {}', dir)
@@ -43,19 +38,9 @@ def _mkdir(dir) {
     }
 }
 
-def sourceEncoding = 'UTF-8'
-tasks.withType(SourceTask).configureEach {
-    // ':compileGroovy', ':compileJava', 'compileTestGroovy', ':compileTestJava', ':groovydoc', ':javadoc'
-    def p1 = 'options'
-    def p2 = 'encoding'
-    if (it.hasProperty(p1)) {
-        if (it[p1].hasProperty(p2)) {
-            logger.info('{} has \'{}.{}\' property', it, p1, p2)
-            it[p1][p2] = sourceEncoding
-        } else {
-            logger.info('{} has no \'{}.{}\' property', it, p1, p2)
-        }
-    } else {
-        logger.info('{} has no \'{}\' property', it, p1)
-    }
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+tasks.withType(Javadoc).configureEach {
+    options.encoding = 'UTF-8'
 }
